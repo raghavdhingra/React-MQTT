@@ -1,10 +1,11 @@
 import React from 'react';
+import Container from '../../common/container/container';
 import './Login.scss';
 
 const Login = () => {
   return (
     <>
-      <div>Login</div>
+      <Container>Login</Container>
     </>
   );
 };
