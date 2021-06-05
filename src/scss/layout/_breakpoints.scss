@@ -1,0 +1,54 @@
+/*
+ * Wide screen Desktop (PC's)
+ */
+
+@mixin desktop-xl {
+  /* Medium devices (desktops, 1366px and up) */
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+/*
+   * Desktop (PC's)
+   */
+
+@mixin desktop {
+  /* Medium devices (desktops, 1024px and up) */
+  @media only screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+/*
+   * Tablet
+   */
+
+@mixin tablet {
+  /* Small devices (tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+/*
+   * Mobile
+   */
+
+@mixin mobile {
+  /* < 768px */
+  @media only screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+/*
+   * Mobile
+   */
+
+@mixin mobile-tablet {
+  /* < 768px */
+  @media only screen and (max-width: 1023px) {
+    @content;
+  }
+}

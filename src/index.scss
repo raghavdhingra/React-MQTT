@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8fcff;
+  color: #30313c;
+
+  &::before,
+  &::after {
+    content: "";
+    height: 300px;
+    position: fixed;
+    z-index: -1;
+    border-radius: 20px;
+    width: 300px;
+    background-color: #ecf9ff;
+    display: block;
+  }
+  &::before {
+    transform: translate(-10%, -10%) rotate(45deg);
+  }
+  &::after {
+    bottom: 0;
+    right: 0;
+    transform: translate(10%, 10%) rotate(45deg);
+  }
+}
