@@ -5,10 +5,16 @@
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  box-sizing: border-box;
 
   @include tablet {
     & {
       width: 750px;
+    }
+  }
+  @include desktop {
+    & {
+      width: 970px;
     }
   }
   @include desktop-xl {

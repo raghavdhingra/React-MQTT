@@ -1,0 +1,19 @@
+.input {
+  padding: 0.6rem 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 2px;
+  border: none;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+
+  &__topMargin {
+    margin-top: 1.5rem;
+  }
+  &__bottomMargin {
+    margin-bottom: 1.5rem;
+  }
+}

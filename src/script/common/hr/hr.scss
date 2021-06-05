@@ -1,0 +1,12 @@
+.hr {
+  height: 1px;
+  width: 100%;
+  margin: 1rem 0;
+
+  &__dark {
+    background: linear-gradient(to bottom right, #404152, #292730);
+  }
+  &__default {
+    background-color: #ecf9ff;
+  }
+}

@@ -1,0 +1,33 @@
+.button {
+  padding: 0.4rem 0.8rem;
+  font-size: 1.2rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  transition: 0.2s ease;
+  font-weight: bold;
+
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &__primary {
+    background-color: #0b97fe;
+    color: #fff;
+  }
+
+  &__container {
+    text-align: center;
+  }
+
+  &__topMargin {
+    margin-top: 1.5rem;
+  }
+  &__bottomMargin {
+    margin-bottom: 1.5rem;
+  }
+}
