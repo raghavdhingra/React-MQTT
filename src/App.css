@@ -1,0 +1,33 @@
+.connection-header {
+  margin: 1.5rem 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.header-connected,
+.header-not-connected {
+  color: #fff;
+  width: max-content;
+  margin: 0 auto;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+.header-connected {
+  background-color: #0f9d58;
+}
+.header-not-connected {
+  background-color: #db4437;
+}
+.btn {
+  background-color: #4285f4;
+  padding: 0.4rem 1rem;
+  border-radius: 3px;
+  color: #fff;
+  margin: auto;
+  cursor: pointer;
+  width: max-content;
+  transition: 0.2s ease;
+}
+.btn:active {
+  transform: scale(0.95);
+}
