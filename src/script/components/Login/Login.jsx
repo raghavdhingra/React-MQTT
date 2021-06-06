@@ -1,4 +1,6 @@
 import React from 'react';
+import mqtt from 'mqtt';
+import { atom, useRecoilState } from 'recoil';
 import Header from '../../common/header/header';
 import Body from '../../common/body/body';
 import Button from '../../common/button/button';
@@ -6,8 +8,8 @@ import Input from '../../common/input/input';
 import Hr from '../../common/hr/hr';
 import Card from '../../common/card/card';
 import Container from '../../common/container/container';
-import { atom, useRecoilState } from 'recoil';
-import mqtt from 'mqtt';
+import Alert from '../../common/alert/alert';
+
 import './Login.scss';
 
 const loginState = atom({
@@ -24,11 +26,27 @@ const Login = () => {
     setLoginCredentials({ ...loginCredentials, [key]: val });
   };
 
-  const establishConnection = () => {};
+  const establishConnection = () => {
+    if (loginCredentials.username && loginCredentials.password) {
+      const mqttValidation = mqtt.connect('ws://mqtt.raghavdhingra.com', {
+        username: 'raghavdhingrs',
+        password: 'qwerty1234',
+        protocol: 'ws',
+        port: '3033',
+      });
+      mqttValidation.on('error', () => {});
+      mqttValidation.on('connect', (a) => {
+        console.log(a);
+      });
+    } else {
+      alert('No');
+    }
+  };
 
   return (
     <>
       <Container>
+        <Alert>YO</Alert>
         <Card>
           <Card variant='dark' shadow>
             <Header>Login</Header>

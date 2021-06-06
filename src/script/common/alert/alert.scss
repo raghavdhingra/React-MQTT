@@ -1,0 +1,47 @@
+.alert {
+  padding: 1rem;
+  color: #2e2e2e;
+  font-size: 1rem;
+  font-weight: bold;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 5px;
+  color: #fff;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  &__success {
+    background-color: #5cb85c;
+    box-shadow: #5cb85c 0px 25px 50px -12px;
+    &::before {
+      content: '☑';
+      margin-right: 1rem;
+    }
+  }
+  &__info {
+    background-color: #5bbfde;
+    box-shadow: #5bbfde 0px 25px 50px -12px;
+    &::before {
+      content: 'ⓘ';
+      margin-right: 1rem;
+    }
+  }
+  &__error {
+    background-color: #d9534f;
+    box-shadow: #d9534f 0px 25px 50px -12px;
+
+    &::before {
+      content: '⊗';
+      margin-right: 1rem;
+    }
+  }
+  &__warning {
+    background-color: #f0ad4e;
+    box-shadow: #f0ad4e 0px 25px 50px -12px;
+    &::before {
+      content: '⚠';
+      margin-right: 1rem;
+    }
+  }
+}

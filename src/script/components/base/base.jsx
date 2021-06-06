@@ -2,23 +2,30 @@ import React, { useEffect } from 'react';
 import Login from '../Login/Login';
 import { atom, useRecoilState } from 'recoil';
 import { Route, Switch, useHistory } from 'react-router-dom';
+import Alert from '../../common/alert/alert';
 
-const loginState = atom({
-  key: 'login',
-  default: false,
+const baseState = atom({
+  key: 'baseState',
+  default: {
+    isLoggedIn: false,
+    error: '',
+    info: '',
+    success: '',
+    warning: '',
+  },
 });
 
 const Base = () => {
   const history = useHistory();
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
+  const [loginState, setLoginState] = useRecoilState(baseState);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (loginState.isLoggedIn) {
       history.push('/dashboard');
     } else {
       history.push('/login');
     }
-  }, [isLoggedIn, history]);
+  }, [loginState, history]);
 
   return (
     <Switch>
@@ -26,6 +33,7 @@ const Base = () => {
         <Login />
       </Route>
       <Route path='/dashboard' exact component={Login} />
+      {loginState.error && <Alert />}
     </Switch>
   );
 };
