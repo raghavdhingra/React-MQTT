@@ -1,11 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.scss";
-import Login from "./script/components/Login/Login";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Base from './script/components/base/base';
+import { RecoilRoot } from 'recoil';
+import { BrowserRouter } from 'react-router-dom';
+
+import './index.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login />
+    <RecoilRoot>
+      <BrowserRouter>
+        <Base />
+      </BrowserRouter>
+    </RecoilRoot>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );

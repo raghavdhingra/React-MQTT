@@ -2,6 +2,12 @@ import React from 'react';
 import './input.scss';
 
 const Input = ({ placeholder, type, value, onChange, margin }) => {
+  const handleChange = (e) => {
+    if (onChange) {
+      onChange(e.target.value);
+    }
+  };
+
   return (
     <>
       <input
@@ -9,7 +15,7 @@ const Input = ({ placeholder, type, value, onChange, margin }) => {
         placeholder={placeholder}
         type={type}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
       />
     </>
   );
