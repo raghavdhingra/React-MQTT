@@ -1,0 +1,15 @@
+@import '../../../../scss/component_import.scss';
+
+.app_list {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+  }
+
+  @include desktop {
+    &__container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

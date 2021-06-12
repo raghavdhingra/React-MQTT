@@ -19,7 +19,7 @@ const Button = ({
   };
 
   return (
-    <div className={`button__container button--${className}`}>
+    <div className={`button__container button--${className || ''}`}>
       <button
         className={`button button__${margin}Margin button__${
           variantClass[variant] || variantClass.primary

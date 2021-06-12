@@ -2,21 +2,23 @@ import React, { useEffect } from 'react';
 import Login from './Login/Login';
 import Dashboard from './Dashboard/dashboard';
 import { useRecoilState } from 'recoil';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import Alert from '../common/alert/alert';
 import { baseStateAtom } from '../RecoilAtom/state';
+import AppList from './Dashboard/AppList/dashboardAppList';
 
 const Base = () => {
   const history = useHistory();
+  const location = useLocation();
   const [loginState, setLoginState] = useRecoilState(baseStateAtom);
 
   useEffect(() => {
-    if (loginState.isLoggedIn) {
+    if (loginState.isLoggedIn && location.pathname !== 'dashboard') {
       history.push('/dashboard');
     } else {
       history.push('/login');
     }
-  }, [loginState, history]);
+  }, [loginState.isLoggedIn, history, location.pathname]);
 
   const handleDismiss = (key) => {
     setLoginState({ ...loginState, [key]: '' });
@@ -57,7 +59,9 @@ const Base = () => {
           <Login />
         </Route>
         <Route path='/dashboard' exact>
-          <Dashboard />
+          <Dashboard>
+            <AppList className='app_list__container' />
+          </Dashboard>
         </Route>
       </Switch>
     </>

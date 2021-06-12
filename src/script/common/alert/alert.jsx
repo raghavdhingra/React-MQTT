@@ -12,11 +12,7 @@ const Alert = ({ title, type, handleDismiss }) => {
     }
   }, [handleDismiss]);
 
-  return (
-    <>
-      <div className={`alert alert__${typeClass}`}>{title}</div>
-    </>
-  );
+  return <div className={`alert alert__${typeClass}`}>{title}</div>;
 };
 
 export default Alert;

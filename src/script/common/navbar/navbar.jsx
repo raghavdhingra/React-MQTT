@@ -11,14 +11,13 @@ const Navbar = ({ className }) => {
   const history = useHistory();
 
   const logoutSession = () => {
+    setCredentials({ username: '', password: '' });
     setLoginState({
       ...loginState,
       isLoading: false,
       success: 'Successfully Logged out',
       isLoggedIn: false,
     });
-    setCredentials({ username: '', password: '' });
-    history.push('/');
   };
 
   return (
@@ -31,7 +30,13 @@ const Navbar = ({ className }) => {
       />
       <div className='navbar__leftFlex'>
         <span className='navbar__username'>🏠 {credentials.username}</span>
-        <Button title='Logout' onClick={logoutSession} />
+        <Button
+          title='Logout'
+          onClick={logoutSession}
+          isDisabled={loginState.isLoading}
+          isLoading={loginState.isLoading}
+          variant='danger'
+        />
       </div>
     </div>
   );

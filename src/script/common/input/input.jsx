@@ -9,16 +9,14 @@ const Input = ({ placeholder, type, value, onChange, margin, isDisabled }) => {
   };
 
   return (
-    <>
-      <input
-        className={`input input__${margin}Margin`}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-        disabled={isDisabled}
-        onChange={handleChange}
-      />
-    </>
+    <input
+      className={`input input__${margin}Margin`}
+      placeholder={placeholder}
+      type={type}
+      value={value}
+      disabled={isDisabled}
+      onChange={handleChange}
+    />
   );
 };
 
