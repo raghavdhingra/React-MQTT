@@ -24,12 +24,19 @@ const Login = () => {
     setLoginState({ ...loginState, isLoading: true });
 
     if (credentials.username && credentials.password) {
-      const mqttValidation = mqtt.connect('ws://mqtt.raghavdhingra.com', {
-        username: credentials.username,
-        password: credentials.password,
-        protocol: 'ws',
-        port: '3033',
-      });
+      const protocolType =
+        process.env.NODE_ENV === 'development' ? 'ws' : 'wss';
+      const portNumber =
+        process.env.NODE_ENV === 'development' ? '3033' : '8083';
+      const mqttValidation = mqtt.connect(
+        `${protocolType}://mqtt.raghavdhingra.com`,
+        {
+          username: credentials.username,
+          password: credentials.password,
+          protocol: protocolType,
+          port: portNumber,
+        }
+      );
       mqttValidation.on('error', () => {
         setLoginState({
           ...loginState,
