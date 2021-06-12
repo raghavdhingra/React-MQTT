@@ -5,15 +5,36 @@
   margin: 1rem auto;
   box-sizing: border-box;
 
+  &__image {
+    background-repeat: no-repeat;
+
+    &--car {
+      background-position: center;
+      background-size: cover;
+      background-image: url('../../../images/car.png');
+    }
+    &--bulb {
+      background-position: top right;
+      background-size: 5rem;
+      background-image: url('../../../images/bulb.png');
+    }
+  }
+
   &__dark {
-    background: linear-gradient(to bottom right, #404152, #292730);
+    // background: linear-gradient(to bottom right, #404152, #292730);
+    background-color: #404152;
     color: #fff;
+    text-shadow: 0 0 3px #3339;
   }
   &__default {
     background-color: #ecf9ff;
     color: #292730;
+    text-shadow: 0 0 3px #fff;
   }
   &__shadow {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  }
+  &__min_height {
+    min-height: 200px;
   }
 }
