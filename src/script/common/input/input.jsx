@@ -1,7 +1,7 @@
 import React from 'react';
 import './input.scss';
 
-const Input = ({ placeholder, type, value, onChange, margin }) => {
+const Input = ({ placeholder, type, value, onChange, margin, isDisabled }) => {
   const handleChange = (e) => {
     if (onChange) {
       onChange(e.target.value);
@@ -15,6 +15,7 @@ const Input = ({ placeholder, type, value, onChange, margin }) => {
         placeholder={placeholder}
         type={type}
         value={value}
+        disabled={isDisabled}
         onChange={handleChange}
       />
     </>

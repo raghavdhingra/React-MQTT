@@ -1,0 +1,54 @@
+.loader {
+  $loader-dimension: 10px;
+  $loader-color: red;
+  $animation-function: opacAnimation 1s ease-in-out infinite forwards;
+
+  &--dark {
+    $loader-color: #30313c;
+  }
+  &--default {
+    $loader-color: #fff;
+  }
+
+  height: $loader-dimension;
+  width: $loader-dimension;
+  background-color: $loader-color;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: inline-block;
+  animation: $animation-function;
+  animation-delay: 0.2s;
+
+  &__container::after,
+  &__container::before {
+    content: '';
+    height: $loader-dimension;
+    width: $loader-dimension;
+    background-color: $loader-color;
+    display: inline-block;
+    border-radius: 50%;
+  }
+
+  &__container::before {
+    margin-right: 5px;
+    animation: $animation-function;
+    animation-delay: 0.1s;
+  }
+  &__container::after {
+    margin-left: 5px;
+    animation: $animation-function;
+    animation-delay: 0.3s;
+  }
+
+  @keyframes opacAnimation {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

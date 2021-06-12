@@ -1,7 +1,8 @@
 import React from 'react';
+import Loader from '../loader/loader';
 import './button.scss';
 
-const Button = ({ title, margin, variant, onClick }) => {
+const Button = ({ title, margin, variant, onClick, isDisabled, isLoading }) => {
   const variantColor = variant || 'primary';
 
   return (
@@ -9,8 +10,9 @@ const Button = ({ title, margin, variant, onClick }) => {
       <button
         className={`button button__${margin}Margin button__${variantColor}`}
         onClick={onClick}
+        disabled={isDisabled}
       >
-        {title}
+        {isLoading ? <Loader /> : <span>{title}</span>}
       </button>
     </div>
   );

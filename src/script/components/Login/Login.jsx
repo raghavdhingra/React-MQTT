@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import mqtt from 'mqtt';
-import { atom, useRecoilState } from 'recoil';
+import { useHistory } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import Header from '../../common/header/header';
 import Body from '../../common/body/body';
 import Button from '../../common/button/button';
@@ -8,45 +9,64 @@ import Input from '../../common/input/input';
 import Hr from '../../common/hr/hr';
 import Card from '../../common/card/card';
 import Container from '../../common/container/container';
-import Alert from '../../common/alert/alert';
+import { credentialAtom, baseStateAtom } from '../../RecoilAtom/state';
 
 import './Login.scss';
 
-const loginState = atom({
-  key: 'loginCredentials',
-  default: {
-    username: 'raghavdhingra',
-    password: 'qwerty1234',
-  },
-});
-
 const Login = () => {
-  const [loginCredentials, setLoginCredentials] = useRecoilState(loginState);
+  const [credentials, setCredentials] = useRecoilState(credentialAtom);
+  const [loginState, setLoginState] = useRecoilState(baseStateAtom);
+  const history = useHistory();
+
   const changeValue = (key, val) => {
-    setLoginCredentials({ ...loginCredentials, [key]: val });
+    setCredentials({ ...credentials, [key]: val });
   };
 
+  useEffect(() => {
+    if (loginState.isLoggedIn) {
+      history.push('/dashboard');
+    }
+  }, [history, loginState]);
+
   const establishConnection = () => {
-    if (loginCredentials.username && loginCredentials.password) {
+    setLoginState({ ...loginState, isLoading: true });
+
+    if (credentials.username && credentials.password) {
       const mqttValidation = mqtt.connect('ws://mqtt.raghavdhingra.com', {
-        username: 'raghavdhingrs',
-        password: 'qwerty1234',
+        username: credentials.username,
+        password: credentials.password,
         protocol: 'ws',
         port: '3033',
       });
-      mqttValidation.on('error', () => {});
-      mqttValidation.on('connect', (a) => {
-        console.log(a);
+      mqttValidation.on('error', () => {
+        setLoginState({
+          ...loginState,
+          isLoggedIn: false,
+          error: 'Invalid Credentials',
+          isLoading: false,
+        });
+      });
+      mqttValidation.on('connect', () => {
+        setLoginState({
+          ...loginState,
+          isLoggedIn: true,
+          success: 'Connection Established',
+          isLoading: false,
+        });
       });
     } else {
-      alert('No');
+      setLoginState({
+        ...loginState,
+        isLoggedIn: false,
+        error: 'Empty Credential found',
+        isLoading: false,
+      });
     }
   };
 
   return (
     <>
       <Container>
-        <Alert>YO</Alert>
         <Card>
           <Card variant='dark' shadow>
             <Header>Login</Header>
@@ -55,17 +75,21 @@ const Login = () => {
               <Input
                 placeholder='Username'
                 type='text'
-                value={loginCredentials.username}
+                isDisabled={loginState.isLoading}
+                value={credentials.username}
                 onChange={(e) => changeValue('username', e)}
               />
               <Input
                 placeholder='Password'
+                isDisabled={loginState.isLoading}
                 type='password'
-                value={loginCredentials.password}
+                value={credentials.password}
                 margin='top'
                 onChange={(e) => changeValue('password', e)}
               />
               <Button
+                isDisabled={loginState.isLoading}
+                isLoading={loginState.isLoading}
                 title='Check In'
                 margin='top'
                 onClick={establishConnection}
