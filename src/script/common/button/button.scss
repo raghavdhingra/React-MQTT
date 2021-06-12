@@ -20,9 +20,21 @@
     background-color: #0b97fe;
     color: #fff;
   }
+  &__danger {
+    background-color: #fa7783;
+    color: #fff;
+  }
+  &__warning {
+    background-color: #ff850c;
+    color: #fff;
+  }
 
   &__container {
     text-align: center;
+  }
+
+  &--not-center {
+    text-align: left;
   }
 
   &__topMargin {

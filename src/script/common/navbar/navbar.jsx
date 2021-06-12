@@ -23,7 +23,12 @@ const Navbar = ({ className }) => {
 
   return (
     <div className={`navbar ${className || ''}`}>
-      <div>yo</div>
+      <Button
+        title='Home'
+        className='not-center'
+        onClick={() => history.push('/dashboard')}
+        variant='warning'
+      />
       <div className='navbar__leftFlex'>
         <span className='navbar__username'>🏠 {credentials.username}</span>
         <Button title='Logout' onClick={logoutSession} />
