@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Base from './script/components/base';
 import { RecoilRoot } from 'recoil';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import './index.scss';
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <BrowserRouter>
+      <HashRouter>
         <Base />
-      </BrowserRouter>
+      </HashRouter>
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')

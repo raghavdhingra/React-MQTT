@@ -8,7 +8,7 @@ const Alert = ({ title, type, handleDismiss }) => {
     if (handleDismiss) {
       setTimeout(() => {
         handleDismiss();
-      }, 4000);
+      }, 2000);
     }
   }, [handleDismiss]);
 
