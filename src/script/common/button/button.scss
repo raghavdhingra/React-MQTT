@@ -8,6 +8,9 @@
   transition: 0.2s ease;
   font-weight: bold;
   min-width: 100px;
+  text-shadow: none;
+  text-decoration: none;
+  color: #fff;
 
   &:focus {
     outline: none;
@@ -18,15 +21,18 @@
 
   &__primary {
     background-color: #0b97fe;
-    color: #fff;
+  }
+  &__secondary {
+    background-color: #292b2c;
   }
   &__danger {
     background-color: #fa7783;
-    color: #fff;
   }
   &__warning {
     background-color: #ff850c;
-    color: #fff;
+  }
+  &__info {
+    background-color: #5bc0de;
   }
 
   &__container {

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import mqtt from 'mqtt';
+import { useHistory } from 'react-router';
 import { useRecoilState } from 'recoil';
 import Header from '../../common/header/header';
 import Body from '../../common/body/body';
@@ -15,10 +16,17 @@ import './Login.scss';
 const Login = () => {
   const [credentials, setCredentials] = useRecoilState(credentialAtom);
   const [loginState, setLoginState] = useRecoilState(baseStateAtom);
+  const history = useHistory();
 
   const changeValue = (key, val) => {
     setCredentials({ ...credentials, [key]: val });
   };
+
+  useEffect(() => {
+    if (loginState.isLoggedIn) {
+      history.replace('/dashboard');
+    }
+  }, [history, loginState.isLoggedIn]);
 
   const establishConnection = () => {
     setLoginState({ ...loginState, isLoading: true });

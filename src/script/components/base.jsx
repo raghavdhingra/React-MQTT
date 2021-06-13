@@ -6,6 +6,7 @@ import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import Alert from '../common/alert/alert';
 import { baseStateAtom } from '../RecoilAtom/state';
 import AppList from './Dashboard/AppList/dashboardAppList';
+import InternetCarRemote from './Dashboard/internetCarRemote/internetCarRemote';
 
 const Base = () => {
   const history = useHistory();
@@ -13,9 +14,7 @@ const Base = () => {
   const [loginState, setLoginState] = useRecoilState(baseStateAtom);
 
   useEffect(() => {
-    if (loginState.isLoggedIn && location.pathname !== 'dashboard') {
-      history.push('/dashboard');
-    } else {
+    if (!loginState.isLoggedIn && location.pathname !== 'login') {
       history.push('/login');
     }
   }, [loginState.isLoggedIn, history, location.pathname]);
@@ -58,10 +57,17 @@ const Base = () => {
         <Route path='/login' exact>
           <Login />
         </Route>
-        <Route path='/dashboard' exact>
-          <Dashboard>
-            <AppList className='app_list__container' />
-          </Dashboard>
+        <Route path='/dashboard'>
+          <Route path='/dashboard' exact>
+            <Dashboard>
+              <AppList className='app_list__container' />
+            </Dashboard>
+          </Route>
+          <Route path='/dashboard/internet-car-remote' exact>
+            <Dashboard>
+              <InternetCarRemote />
+            </Dashboard>
+          </Route>
         </Route>
       </Switch>
     </>
