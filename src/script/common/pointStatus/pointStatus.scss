@@ -1,0 +1,14 @@
+.point_status {
+  $point_dimension: 20px;
+  height: $point_dimension;
+  width: $point_dimension;
+  border-radius: 50%;
+  display: inline-block;
+
+  &--connected {
+    background-color: #5cb85c;
+  }
+  &--not-connected {
+    background-color: #fa7783;
+  }
+}

@@ -20,6 +20,7 @@ const Button = ({
     danger: 'danger',
     warning: 'warning',
     info: 'info',
+    success: 'success',
   };
 
   return (

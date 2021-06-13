@@ -4,55 +4,64 @@ import Dashboard from './Dashboard/dashboard';
 import { useRecoilState } from 'recoil';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import Alert from '../common/alert/alert';
-import { baseStateAtom } from '../RecoilAtom/state';
+import {
+  errorAlert,
+  infoAlert,
+  loginState,
+  successAlert,
+  warningAlert,
+} from '../RecoilAtom/state';
 import AppList from './Dashboard/AppList/dashboardAppList';
 import InternetCarRemote from './Dashboard/internetCarRemote/internetCarRemote';
 
 const Base = () => {
   const history = useHistory();
   const location = useLocation();
-  const [loginState, setLoginState] = useRecoilState(baseStateAtom);
+  const [isLoggedIn] = useRecoilState(loginState);
+  const [errorMsg, setErrorMsg] = useRecoilState(errorAlert);
+  const [successMsg, setSuccessMsg] = useRecoilState(successAlert);
+  const [infoMsg, setInfoMsg] = useRecoilState(infoAlert);
+  const [warningMsg, setWarningMsg] = useRecoilState(warningAlert);
 
   useEffect(() => {
-    if (!loginState.isLoggedIn && location.pathname !== 'login') {
+    if (!isLoggedIn && location.pathname !== 'login') {
       history.push('/login');
     }
-  }, [loginState.isLoggedIn, history, location.pathname]);
-
-  const handleDismiss = (key) => {
-    setLoginState({ ...loginState, [key]: '' });
-  };
+  }, [isLoggedIn, history, location.pathname]);
 
   return (
     <>
-      {loginState.error && (
-        <Alert
-          type='error'
-          title={loginState.error}
-          handleDismiss={() => handleDismiss('error')}
-        />
-      )}
-      {loginState.info && (
-        <Alert
-          type='info'
-          title={loginState.info}
-          handleDismiss={() => handleDismiss('info')}
-        />
-      )}
-      {loginState.warning && (
-        <Alert
-          type='warning'
-          title={loginState.warning}
-          handleDismiss={() => handleDismiss('warning')}
-        />
-      )}
-      {loginState.success && (
-        <Alert
-          type='success'
-          title={loginState.success}
-          handleDismiss={() => handleDismiss('success')}
-        />
-      )}
+      <div className='alert__container'>
+        {errorMsg && (
+          <Alert
+            type='error'
+            title={errorMsg}
+            handleDismiss={() => setErrorMsg('')}
+          />
+        )}
+        {infoMsg && (
+          <Alert
+            type='info'
+            title={infoMsg}
+            handleDismiss={() => setInfoMsg('')}
+          />
+        )}
+        {warningMsg && (
+          <Alert
+            type='warning'
+            title={warningMsg}
+            handleDismiss={() => setWarningMsg('')}
+          />
+        )}
+        {successMsg && (
+          <Alert
+            type='success'
+            title={successMsg}
+            handleDismiss={() => setSuccessMsg('')}
+          />
+        )}
+      </div>
+
       <Switch>
         <Route path='/login' exact>
           <Login />

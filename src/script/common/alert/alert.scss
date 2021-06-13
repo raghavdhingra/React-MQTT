@@ -3,13 +3,19 @@
   color: #2e2e2e;
   font-size: 1rem;
   font-weight: bold;
-  max-width: 300px;
+  max-width: 100%;
   width: 100%;
   border-radius: 5px;
+  box-sizing: border-box;
   color: #fff;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+  margin-top: 0.5rem;
+
+  &__container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    max-width: 300px;
+  }
 
   &__success {
     background-color: #5cb85c;

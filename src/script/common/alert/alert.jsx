@@ -2,7 +2,12 @@ import React, { useEffect } from 'react';
 import './alert.scss';
 
 const Alert = ({ title, type, handleDismiss }) => {
-  const typeClass = type || 'info'; // info, error, warning, success
+  const typeClass = {
+    info: 'info',
+    error: 'error',
+    warning: 'warning',
+    success: 'success',
+  };
 
   useEffect(() => {
     if (handleDismiss) {
@@ -10,9 +15,14 @@ const Alert = ({ title, type, handleDismiss }) => {
         handleDismiss();
       }, 2000);
     }
-  }, [handleDismiss]);
+    // eslint-disable-next-line
+  }, []);
 
-  return <div className={`alert alert__${typeClass}`}>{title}</div>;
+  return title ? (
+    <div className={`alert alert__${typeClass[type] || typeClass.info}`}>
+      {title}
+    </div>
+  ) : null;
 };
 
 export default Alert;

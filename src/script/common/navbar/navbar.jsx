@@ -1,23 +1,31 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { credentialAtom, baseStateAtom } from '../../RecoilAtom/state';
+import {
+  credentialAtom,
+  loadingState,
+  loginState,
+  successAlert,
+} from '../../RecoilAtom/state';
 import { useHistory } from 'react-router-dom';
 import Button from '../button/button';
 import './navbar.scss';
 
 const Navbar = ({ className }) => {
   const [credentials, setCredentials] = useRecoilState(credentialAtom);
-  const [loginState, setLoginState] = useRecoilState(baseStateAtom);
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
+  const [successMsg, setSuccessMsg] = useRecoilState(successAlert);
   const history = useHistory();
 
   const logoutSession = () => {
-    setCredentials({ username: '', password: '' });
-    setLoginState({
-      ...loginState,
-      isLoading: false,
-      success: 'Successfully Logged out',
-      isLoggedIn: false,
-    });
+    if (isLoggedIn) {
+      setCredentials({ username: '', password: '' });
+      setIsLoading(false);
+      setIsLoggedIn(false);
+      if (successMsg === 'Successfully Logged out') {
+        setSuccessMsg('Successfully Logged out');
+      }
+    }
   };
 
   return (
@@ -33,8 +41,8 @@ const Navbar = ({ className }) => {
         <Button
           title='Logout'
           onClick={logoutSession}
-          isDisabled={loginState.isLoading}
-          isLoading={loginState.isLoading}
+          isDisabled={isLoading}
+          isLoading={isLoading}
           variant='danger'
         />
       </div>

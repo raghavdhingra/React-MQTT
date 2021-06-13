@@ -9,13 +9,28 @@ import Input from '../../common/input/input';
 import Hr from '../../common/hr/hr';
 import Card from '../../common/card/card';
 import Container from '../../common/container/container';
-import { credentialAtom, baseStateAtom } from '../../RecoilAtom/state';
+import {
+  credentialAtom,
+  loginState,
+  loadingState,
+  errorAlert,
+  successAlert,
+  warningAlert,
+} from '../../RecoilAtom/state';
 
 import './Login.scss';
 
 const Login = () => {
   const [credentials, setCredentials] = useRecoilState(credentialAtom);
-  const [loginState, setLoginState] = useRecoilState(baseStateAtom);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
+  // eslint-disable-next-line
+  const [errorMsg, setErrorMsg] = useRecoilState(errorAlert);
+  // eslint-disable-next-line
+  const [successMsg, setSuccessMsg] = useRecoilState(successAlert);
+  // eslint-disable-next-line
+  const [warningMsg, setWarningMsg] = useRecoilState(warningAlert);
+
   const history = useHistory();
 
   const changeValue = (key, val) => {
@@ -23,13 +38,14 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (loginState.isLoggedIn) {
+    if (isLoggedIn) {
       history.replace('/dashboard');
     }
-  }, [history, loginState.isLoggedIn]);
+  }, [history, isLoggedIn]);
 
   const establishConnection = () => {
-    setLoginState({ ...loginState, isLoading: true });
+    setIsLoading(true);
+    setWarningMsg('Connection is Progress...');
 
     if (credentials.username && credentials.password) {
       const protocolType =
@@ -46,28 +62,19 @@ const Login = () => {
         }
       );
       mqttValidation.on('error', () => {
-        setLoginState({
-          ...loginState,
-          isLoggedIn: false,
-          error: 'Invalid Credentials',
-          isLoading: false,
-        });
+        setIsLoading(false);
+        setErrorMsg('Invalid Credentials');
+        setIsLoggedIn(false);
       });
       mqttValidation.on('connect', () => {
-        setLoginState({
-          ...loginState,
-          isLoggedIn: true,
-          success: 'Connection Established',
-          isLoading: false,
-        });
+        setIsLoading(false);
+        setSuccessMsg('Connection Established');
+        setIsLoggedIn(true);
       });
     } else {
-      setLoginState({
-        ...loginState,
-        isLoggedIn: false,
-        error: 'Empty Credential found',
-        isLoading: false,
-      });
+      setIsLoading(false);
+      setErrorMsg('Empty Credential');
+      setIsLoggedIn(false);
     }
   };
 
@@ -81,21 +88,21 @@ const Login = () => {
             <Input
               placeholder='Username'
               type='text'
-              isDisabled={loginState.isLoading}
+              isDisabled={isLoading}
               value={credentials.username}
               onChange={(e) => changeValue('username', e)}
             />
             <Input
               placeholder='Password'
-              isDisabled={loginState.isLoading}
+              isDisabled={isLoading}
               type='password'
               value={credentials.password}
               margin='top'
               onChange={(e) => changeValue('password', e)}
             />
             <Button
-              isDisabled={loginState.isLoading}
-              isLoading={loginState.isLoading}
+              isDisabled={isLoading}
+              isLoading={isLoading}
               title='Check In'
               margin='top'
               onClick={establishConnection}
