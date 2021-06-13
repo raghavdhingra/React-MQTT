@@ -33,6 +33,46 @@ const InternetCarRemote = () => {
   const [infoMsg, setInfoMsg] = useRecoilState(infoAlert);
 
   const ARROW_WIDTH = '40px';
+  const BUTTON_KEY = {
+    up: 'button_up',
+    down: 'button_down',
+    right: 'button_right',
+    left: 'button_left',
+  };
+  const MOUSE_EVENT = {
+    up: 'mouse_up',
+    down: 'mouse_down',
+  };
+
+  const triggerCar = (buttonKey, mouseEvent) => {
+    if (isConnected) {
+      if (buttonKey === BUTTON_KEY.up) {
+        if (mouseEvent === MOUSE_EVENT.up) {
+          MqttClient.publish('car/remote/up', '0');
+        } else if (mouseEvent === MOUSE_EVENT.down) {
+          MqttClient.publish('car/remote/up', '1');
+        }
+      } else if (buttonKey === BUTTON_KEY.left) {
+        if (mouseEvent === MOUSE_EVENT.up) {
+          MqttClient.publish('car/remote/left', '0');
+        } else if (mouseEvent === MOUSE_EVENT.down) {
+          MqttClient.publish('car/remote/left', '1');
+        }
+      } else if (buttonKey === BUTTON_KEY.right) {
+        if (mouseEvent === MOUSE_EVENT.up) {
+          MqttClient.publish('car/remote/right', '0');
+        } else if (mouseEvent === MOUSE_EVENT.down) {
+          MqttClient.publish('car/remote/right', '1');
+        }
+      } else if (buttonKey === BUTTON_KEY.down) {
+        if (mouseEvent === MOUSE_EVENT.up) {
+          MqttClient.publish('car/remote/down', '0');
+        } else if (mouseEvent === MOUSE_EVENT.down) {
+          MqttClient.publish('car/remote/down', '1');
+        }
+      }
+    }
+  };
 
   const connectToMQTT = () => {
     setWarningMsg('Connecting to Car...');
@@ -74,7 +114,7 @@ const InternetCarRemote = () => {
   useEffect(() => {
     connectToMQTT();
     // eslint-disable-next-line
-  }, [credentials]);
+  }, []);
 
   return (
     <Container>
@@ -91,15 +131,27 @@ const InternetCarRemote = () => {
               variant='danger'
               margin='auto'
               className='dashboard__img-up'
+              onMouseDown={() => triggerCar(BUTTON_KEY.up, MOUSE_EVENT.down)}
+              onMouseUp={() => triggerCar(BUTTON_KEY.up, MOUSE_EVENT.up)}
             >
               <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
             </RoundButton>
           </div>
           <div className='dashboard__card-grid-2 dashboard__center-align'>
-            <RoundButton variant='danger' className='dashboard__btn-left'>
+            <RoundButton
+              variant='danger'
+              className='dashboard__btn-left'
+              onMouseDown={() => triggerCar(BUTTON_KEY.left, MOUSE_EVENT.down)}
+              onMouseUp={() => triggerCar(BUTTON_KEY.left, MOUSE_EVENT.up)}
+            >
               <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
             </RoundButton>
-            <RoundButton variant='danger' className='dashboard__btn-right'>
+            <RoundButton
+              variant='danger'
+              className='dashboard__btn-right'
+              onMouseDown={() => triggerCar(BUTTON_KEY.right, MOUSE_EVENT.down)}
+              onMouseUp={() => triggerCar(BUTTON_KEY.right, MOUSE_EVENT.up)}
+            >
               <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
             </RoundButton>
           </div>
@@ -108,6 +160,8 @@ const InternetCarRemote = () => {
               variant='danger'
               margin='auto'
               className='dashboard__btn-down'
+              onMouseDown={() => triggerCar(BUTTON_KEY.down, MOUSE_EVENT.down)}
+              onMouseUp={() => triggerCar(BUTTON_KEY.down, MOUSE_EVENT.up)}
             >
               <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
             </RoundButton>

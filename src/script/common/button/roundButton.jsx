@@ -7,6 +7,8 @@ const RoundButton = ({
   variant,
   margin,
   children,
+  onMouseDown,
+  onMouseUp,
 }) => {
   const variantClass = {
     primary: 'primary',
@@ -19,6 +21,8 @@ const RoundButton = ({
 
   return (
     <button
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
       onClick={onClick}
       className={`button button--round button__${margin}Margin button__${
         variant ? variantClass[variant] : variantClass.primary
