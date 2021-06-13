@@ -6,12 +6,16 @@ import Container from '../../../common/container/container';
 import {
   credentialAtom,
   errorAlert,
+  infoAlert,
   loadingState,
   successAlert,
   warningAlert,
 } from '../../../RecoilAtom/state';
 import Header from '../../../common/header/header';
 import PointStatus from '../../../common/pointStatus/pointStatus';
+import RoundButton from '../../../common/button/roundButton';
+import Button from '../../../common/button/button';
+import ARROW from '../../../../images/arrow.svg';
 
 let MqttClient = null;
 const InternetCarRemote = () => {
@@ -25,13 +29,13 @@ const InternetCarRemote = () => {
   const [successMsg, setSuccessMsg] = useRecoilState(successAlert);
   // eslint-disable-next-line
   const [warningMsg, setWarningMsg] = useRecoilState(warningAlert);
+  // eslint-disable-next-line
+  const [infoMsg, setInfoMsg] = useRecoilState(infoAlert);
 
-  useEffect(() => {
+  const ARROW_WIDTH = '40px';
+
+  const connectToMQTT = () => {
     setWarningMsg('Connecting to Car...');
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
     if (credentials.username && credentials.password) {
       setIsLoading(true);
       const protocolType =
@@ -59,15 +63,63 @@ const InternetCarRemote = () => {
       setIsLoading(false);
       setSuccessMsg('Error while connection');
     }
+  };
+
+  const disconnectMQTT = () => {
+    setIsConnected(false);
+    MqttClient = null;
+    setInfoMsg('Disconnected from the car');
+  };
+
+  useEffect(() => {
+    connectToMQTT();
     // eslint-disable-next-line
   }, [credentials]);
 
   return (
     <Container>
-      <Card isShadow variant='dark'>
+      <Card isShadow variant='default'>
         <Header>
-          <PointStatus isConnected={isConnected} /> YO
+          <PointStatus isConnected={isConnected} />{' '}
+          {isConnected ? 'Active' : 'Inactive'}
         </Header>
+      </Card>
+      <Card isShadow variant='default'>
+        <Card variant='dark'>
+          <div className='dashboard__center-align'>
+            <RoundButton
+              variant='danger'
+              margin='auto'
+              className='dashboard__img-up'
+            >
+              <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
+            </RoundButton>
+          </div>
+          <div className='dashboard__card-grid-2 dashboard__center-align'>
+            <RoundButton variant='danger' className='dashboard__btn-left'>
+              <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
+            </RoundButton>
+            <RoundButton variant='danger' className='dashboard__btn-right'>
+              <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
+            </RoundButton>
+          </div>
+          <div className='dashboard__center-align'>
+            <RoundButton
+              variant='danger'
+              margin='auto'
+              className='dashboard__btn-down'
+            >
+              <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
+            </RoundButton>
+          </div>
+        </Card>
+      </Card>
+      <Card isShadow>
+        <Button
+          variant='info'
+          title={isConnected ? 'Disconnect' : 'Connect'}
+          onClick={isConnected ? disconnectMQTT : connectToMQTT}
+        />
       </Card>
     </Container>
   );

@@ -19,6 +19,14 @@
     transform: scale(0.95);
   }
 
+  &--round {
+    $btn_dimension: 80px;
+    height: $btn_dimension;
+    width: $btn_dimension;
+    border-radius: 50%;
+    min-width: 0;
+  }
+
   &__primary {
     background-color: #0b97fe;
   }
@@ -51,5 +59,9 @@
   }
   &__bottomMargin {
     margin-bottom: 1.5rem;
+  }
+  &__autoMargin {
+    margin-left: auto;
+    margin-right: auto;
   }
 }

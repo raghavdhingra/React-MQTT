@@ -1,0 +1,36 @@
+@import '../../../scss/component_import.scss';
+
+.dashboard {
+  &__card-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &__center-align {
+    text-align: center;
+  }
+
+  &__btn-left {
+    margin-right: auto;
+  }
+  &__btn-right {
+    margin-left: auto;
+  }
+
+  &__btn-left > img {
+    transform: rotate(-90deg) translate(-2px, -3px);
+  }
+  &__btn-right > img {
+    transform: rotate(90deg) translate(2px, -3px);
+  }
+  &__btn-down > img {
+    transform: rotate(180deg) translateY(-5px);
+  }
+
+  @include desktop {
+    &__btn-left,
+    &__btn-right {
+      margin: auto;
+    }
+  }
+}
