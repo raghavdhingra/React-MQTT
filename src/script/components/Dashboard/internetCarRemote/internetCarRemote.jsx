@@ -16,6 +16,16 @@ import PointStatus from '../../../common/pointStatus/pointStatus';
 import RoundButton from '../../../common/button/roundButton';
 import Button from '../../../common/button/button';
 import ARROW from '../../../../images/arrow.svg';
+import {
+  BASE_BROKER_URL,
+  PORT_NUMBER,
+  PROTOCOL_TYPE,
+  BASE_PUBLISH_EVENT,
+  ARROW_WIDTH,
+  BUTTON_KEY,
+  MOUSE_EVENT,
+  PUBLISH_EVENT,
+} from '../../../utility';
 
 let MqttClient = null;
 const InternetCarRemote = () => {
@@ -32,43 +42,37 @@ const InternetCarRemote = () => {
   // eslint-disable-next-line
   const [infoMsg, setInfoMsg] = useRecoilState(infoAlert);
 
-  const ARROW_WIDTH = '40px';
-  const BUTTON_KEY = {
-    up: 'button_up',
-    down: 'button_down',
-    right: 'button_right',
-    left: 'button_left',
-  };
-  const MOUSE_EVENT = {
-    up: 'mouse_up',
-    down: 'mouse_down',
-  };
-
   const triggerCar = (buttonKey, mouseEvent) => {
     if (isConnected) {
       if (buttonKey === BUTTON_KEY.up) {
         if (mouseEvent === MOUSE_EVENT.up) {
-          MqttClient.publish('car/remote/up', '0');
+          MqttClient.publish(`${BASE_PUBLISH_EVENT}${PUBLISH_EVENT.up}`, '0');
         } else if (mouseEvent === MOUSE_EVENT.down) {
-          MqttClient.publish('car/remote/up', '1');
+          MqttClient.publish(`${BASE_PUBLISH_EVENT}${PUBLISH_EVENT.up}`, '1');
         }
       } else if (buttonKey === BUTTON_KEY.left) {
         if (mouseEvent === MOUSE_EVENT.up) {
-          MqttClient.publish('car/remote/left', '0');
+          MqttClient.publish(`${BASE_PUBLISH_EVENT}${PUBLISH_EVENT.left}`, '0');
         } else if (mouseEvent === MOUSE_EVENT.down) {
-          MqttClient.publish('car/remote/left', '1');
+          MqttClient.publish(`${BASE_PUBLISH_EVENT}${PUBLISH_EVENT.left}`, '1');
         }
       } else if (buttonKey === BUTTON_KEY.right) {
         if (mouseEvent === MOUSE_EVENT.up) {
-          MqttClient.publish('car/remote/right', '0');
+          MqttClient.publish(
+            `${BASE_PUBLISH_EVENT}${PUBLISH_EVENT.right}`,
+            '0'
+          );
         } else if (mouseEvent === MOUSE_EVENT.down) {
-          MqttClient.publish('car/remote/right', '1');
+          MqttClient.publish(
+            `${BASE_PUBLISH_EVENT}${PUBLISH_EVENT.right}`,
+            '1'
+          );
         }
       } else if (buttonKey === BUTTON_KEY.down) {
         if (mouseEvent === MOUSE_EVENT.up) {
-          MqttClient.publish('car/remote/down', '0');
+          MqttClient.publish(`${BASE_PUBLISH_EVENT}${PUBLISH_EVENT.down}`, '0');
         } else if (mouseEvent === MOUSE_EVENT.down) {
-          MqttClient.publish('car/remote/down', '1');
+          MqttClient.publish(`${BASE_PUBLISH_EVENT}${PUBLISH_EVENT.down}`, '1');
         }
       }
     }
@@ -78,15 +82,11 @@ const InternetCarRemote = () => {
     setWarningMsg('Connecting to Car...');
     if (credentials.username && credentials.password) {
       setIsLoading(true);
-      const protocolType =
-        process.env.NODE_ENV === 'development' ? 'ws' : 'wss';
-      const portNumber =
-        process.env.NODE_ENV === 'development' ? '3033' : '8083';
-      MqttClient = mqtt.connect(`${protocolType}://mqtt.raghavdhingra.com`, {
+      MqttClient = mqtt.connect(`${PROTOCOL_TYPE}://${BASE_BROKER_URL}`, {
         username: credentials.username,
         password: credentials.password,
-        protocol: protocolType,
-        port: portNumber,
+        protocol: PROTOCOL_TYPE,
+        port: PORT_NUMBER,
       });
       MqttClient.on('connect', () => {
         setIsConnected(true);

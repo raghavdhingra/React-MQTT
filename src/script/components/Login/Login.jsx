@@ -19,6 +19,7 @@ import {
 } from '../../RecoilAtom/state';
 
 import './Login.scss';
+import { BASE_BROKER_URL, PORT_NUMBER, PROTOCOL_TYPE } from '../../utility';
 
 const Login = () => {
   const [credentials, setCredentials] = useRecoilState(credentialAtom);
@@ -48,17 +49,13 @@ const Login = () => {
     setWarningMsg('Connection is Progress...');
 
     if (credentials.username && credentials.password) {
-      const protocolType =
-        process.env.NODE_ENV === 'development' ? 'ws' : 'wss';
-      const portNumber =
-        process.env.NODE_ENV === 'development' ? '3033' : '8083';
       const mqttValidation = mqtt.connect(
-        `${protocolType}://mqtt.raghavdhingra.com`,
+        `${PROTOCOL_TYPE}://${BASE_BROKER_URL}`,
         {
           username: credentials.username,
           password: credentials.password,
-          protocol: protocolType,
-          port: portNumber,
+          protocol: PROTOCOL_TYPE,
+          port: PORT_NUMBER,
         }
       );
       mqttValidation.on('error', () => {
