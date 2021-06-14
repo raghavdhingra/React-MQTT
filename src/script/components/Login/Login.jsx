@@ -39,6 +39,14 @@ const Login = () => {
   };
 
   useEffect(() => {
+    const envUser = process.env.REACT_MQTT_USERNAME;
+    const envPass = process.env.REACT_MQTT_PASSWORD;
+    if (envUser && envPass) {
+      setCredentials({ username: envUser, password: envPass });
+    }
+  }, [setCredentials]);
+
+  useEffect(() => {
     if (isLoggedIn) {
       history.replace('/dashboard');
     }

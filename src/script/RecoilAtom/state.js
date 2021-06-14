@@ -30,7 +30,7 @@ export const errorAlert = atom({
 export const credentialAtom = atom({
   key: 'credentialAtom',
   default: {
-    username: process.env.REACT_MQTT_USERNAME,
-    password: process.env.REACT_MQTT_PASSWORD,
+    username: '',
+    password: '',
   },
 });
