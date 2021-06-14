@@ -245,6 +245,8 @@ const InternetCarRemote = () => {
         />
         <Button
           variant='info'
+          isDisabled={isLoading}
+          isLoading={isLoading}
           title={isConnected ? 'Disconnect' : 'Connect'}
           onClick={isConnected ? disconnectMQTT : connectToMQTT}
         />
