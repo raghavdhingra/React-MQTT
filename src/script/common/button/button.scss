@@ -13,8 +13,9 @@
   text-shadow: none;
   text-decoration: none;
   color: #fff;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: none;
+  -webkit-tap-highlight-color: transparent !important;
+  touch-action: none !important;
+  user-select: none !important;
 
   &:focus {
     outline: none;
