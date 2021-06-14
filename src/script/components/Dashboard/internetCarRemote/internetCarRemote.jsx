@@ -15,13 +15,11 @@ import Header from '../../../common/header/header';
 import PointStatus from '../../../common/pointStatus/pointStatus';
 import RoundButton from '../../../common/button/roundButton';
 import Button from '../../../common/button/button';
-import ARROW from '../../../../images/arrow.svg';
 import {
   BASE_BROKER_URL,
   PORT_NUMBER,
   PROTOCOL_TYPE,
   BASE_PUBLISH_EVENT,
-  ARROW_WIDTH,
   BUTTON_KEY,
   MOUSE_EVENT,
   PUBLISH_EVENT,

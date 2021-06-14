@@ -15,8 +15,6 @@ export const PUBLISH_EVENT = {
 
 export const BASE_PUBLISH_EVENT = 'car/remote/';
 
-export const ARROW_WIDTH = '40px';
-
 export const BUTTON_KEY = {
   up: 'button_up',
   down: 'button_down',
