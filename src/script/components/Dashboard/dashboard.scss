@@ -10,23 +10,26 @@
     text-align: center;
   }
 
+  &__btn-up,
+  &__btn-left,
+  &__btn-right,
+  &__btn-down {
+    background-image: url('../../../images/arrow.svg');
+    background-repeat: no-repeat;
+    background-position: center 1.5rem;
+    background-size: 3rem;
+  }
   &__btn-left {
+    transform: rotate(-90deg);
     margin-right: auto;
   }
   &__btn-right {
+    transform: rotate(90deg);
     margin-left: auto;
   }
-
-  &__btn-left > img {
-    transform: rotate(-90deg) translate(-2px, -3px);
+  &__btn-down {
+    transform: rotate(180deg);
   }
-  &__btn-right > img {
-    transform: rotate(90deg) translate(2px, -3px);
-  }
-  &__btn-down > img {
-    transform: rotate(180deg) translateY(-5px);
-  }
-
   &__flex {
     display: flex;
     justify-content: center;

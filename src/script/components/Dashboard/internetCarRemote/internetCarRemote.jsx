@@ -202,12 +202,10 @@ const InternetCarRemote = () => {
             <RoundButton
               variant='danger'
               margin='auto'
-              className='dashboard__img-up'
+              className='dashboard__btn-up'
               onMouseDown={() => triggerCar(BUTTON_KEY.up, MOUSE_EVENT.down)}
               onMouseUp={() => triggerCar(BUTTON_KEY.up, MOUSE_EVENT.up)}
-            >
-              <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
-            </RoundButton>
+            />
           </div>
           <div className='dashboard__card-grid-2 dashboard__center-align'>
             <RoundButton
@@ -215,17 +213,13 @@ const InternetCarRemote = () => {
               className='dashboard__btn-left'
               onMouseDown={() => triggerCar(BUTTON_KEY.left, MOUSE_EVENT.down)}
               onMouseUp={() => triggerCar(BUTTON_KEY.left, MOUSE_EVENT.up)}
-            >
-              <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
-            </RoundButton>
+            />
             <RoundButton
               variant='danger'
               className='dashboard__btn-right'
               onMouseDown={() => triggerCar(BUTTON_KEY.right, MOUSE_EVENT.down)}
               onMouseUp={() => triggerCar(BUTTON_KEY.right, MOUSE_EVENT.up)}
-            >
-              <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
-            </RoundButton>
+            />
           </div>
           <div className='dashboard__center-align'>
             <RoundButton
@@ -234,9 +228,7 @@ const InternetCarRemote = () => {
               className='dashboard__btn-down'
               onMouseDown={() => triggerCar(BUTTON_KEY.down, MOUSE_EVENT.down)}
               onMouseUp={() => triggerCar(BUTTON_KEY.down, MOUSE_EVENT.up)}
-            >
-              <img src={ARROW} alt='down_arrow' width={ARROW_WIDTH} />
-            </RoundButton>
+            />
           </div>
         </Card>
       </Card>
