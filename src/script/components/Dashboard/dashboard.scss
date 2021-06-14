@@ -27,6 +27,12 @@
     transform: rotate(180deg) translateY(-5px);
   }
 
+  &__flex {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
   @include desktop {
     &__btn-left,
     &__btn-right {

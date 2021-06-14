@@ -7,6 +7,7 @@ const Card = ({
   isShadow,
   isMinHeight,
   backgroundImage,
+  className,
 }) => {
   const variantClass = {
     dark: 'dark',
@@ -15,8 +16,8 @@ const Card = ({
 
   return (
     <div
-      className={`card card__${
-        variantClass[variant] || variantClass.default
+      className={`card card__${variantClass[variant] || variantClass.default} ${
+        className || ''
       } card__${isShadow ? 'shadow' : ''} card__${
         isMinHeight ? 'min_height' : ''
       } card__image card__image--${backgroundImage || ''}`}

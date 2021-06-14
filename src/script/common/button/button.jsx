@@ -37,7 +37,7 @@ const Button = ({
         </button>
       ) : (
         <Link
-          className={`button button__${margin}Margin button__${
+          className={`button button__${margin || ''}Margin button__${
             variantClass[variant] || variantClass.primary
           }`}
           to={isDisabled ? '' : href}

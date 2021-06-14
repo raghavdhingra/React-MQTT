@@ -119,6 +119,9 @@ const InternetCarRemote = () => {
   };
 
   const addKeyboardListener = () => {
+    setInfoMsg(
+      'Keyboard is engaged. Now, you can control the car with the arrow keys.'
+    );
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowUp') {
         if (!isUpKey_down) {
@@ -160,6 +163,9 @@ const InternetCarRemote = () => {
   };
 
   const removeKeyboardListener = () => {
+    setWarningMsg(
+      'Keyboard is disengaged. You can not use the keyboard as a controller.'
+    );
     document.addEventListener('keydown', null);
     document.addEventListener('keyup', null);
   };
@@ -230,9 +236,10 @@ const InternetCarRemote = () => {
           </div>
         </Card>
       </Card>
-      <Card isShadow>
+      <Card isShadow className='dashboard__flex'>
         <Button
           variant='success'
+          className='dashboard__mobile_disable'
           title={isKeyboardListener ? 'Disengage Keyboard' : 'Engage Keyboard'}
           onClick={() => setIsKeyboardListener(!isKeyboardListener)}
         />
