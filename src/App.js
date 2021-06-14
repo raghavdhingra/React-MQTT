@@ -10,8 +10,8 @@ const App = () => {
 
   useEffect(() => {
     client = mqtt.connect('ws://mqtt.raghavdhingra.com', {
-      username: 'raghavdhingra',
-      password: 'qwerty1234',
+      username: '',
+      password: '',
       protocol: 'ws',
       port: '3033',
     });
@@ -48,8 +48,8 @@ const App = () => {
 
   return (
     <>
-      <div className="connection-header">Internet Controlled Car</div>
-      <div className="connection-header">
+      <div className='connection-header'>Internet Controlled Car</div>
+      <div className='connection-header'>
         <div
           className={isConnected ? 'header-connected' : 'header-not-connected'}
         >
@@ -59,7 +59,7 @@ const App = () => {
       <div
         ref={BtnRef}
         //  onClick={sendPacket}
-        className="btn"
+        className='btn'
       >
         Click
       </div>
