@@ -23,6 +23,8 @@ const RoundButton = ({
     <button
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
+      onTouchStart={onMouseDown}
+      onTouchEnd={onMouseUp}
       onClick={onClick}
       className={`button button--round button__${margin}Margin button__${
         variant ? variantClass[variant] : variantClass.primary

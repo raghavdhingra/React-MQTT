@@ -118,56 +118,60 @@ const InternetCarRemote = () => {
     setInfoMsg('Disconnected from the car');
   };
 
+  const keyDownEventFunction = (e) => {
+    if (e.key === 'ArrowUp') {
+      if (!isUpKey_down) {
+        isUpKey_down = true;
+        triggerCar(BUTTON_KEY.up, MOUSE_EVENT.down);
+      }
+    } else if (e.key === 'ArrowLeft') {
+      if (!isLeftKey_down) {
+        isLeftKey_down = true;
+        triggerCar(BUTTON_KEY.left, MOUSE_EVENT.down);
+      }
+    } else if (e.key === 'ArrowRight') {
+      if (!isRightKey_down) {
+        isRightKey_down = true;
+        triggerCar(BUTTON_KEY.right, MOUSE_EVENT.down);
+      }
+    } else if (e.key === 'ArrowDown') {
+      if (!isDownKey_down) {
+        isDownKey_down = true;
+        triggerCar(BUTTON_KEY.down, MOUSE_EVENT.down);
+      }
+    }
+  };
+
+  const keyUpEventFunction = (e) => {
+    if (e.key === 'ArrowUp') {
+      isUpKey_down = false;
+      triggerCar(BUTTON_KEY.up, MOUSE_EVENT.up);
+    } else if (e.key === 'ArrowLeft') {
+      isLeftKey_down = false;
+      triggerCar(BUTTON_KEY.left, MOUSE_EVENT.up);
+    } else if (e.key === 'ArrowRight') {
+      isRightKey_down = false;
+      triggerCar(BUTTON_KEY.right, MOUSE_EVENT.up);
+    } else if (e.key === 'ArrowDown') {
+      isDownKey_down = false;
+      triggerCar(BUTTON_KEY.down, MOUSE_EVENT.up);
+    }
+  };
+
   const addKeyboardListener = () => {
     setInfoMsg(
       'Keyboard is engaged. Now, you can control the car with the arrow keys.'
     );
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowUp') {
-        if (!isUpKey_down) {
-          isUpKey_down = true;
-          triggerCar(BUTTON_KEY.up, MOUSE_EVENT.down);
-        }
-      } else if (e.key === 'ArrowLeft') {
-        if (!isLeftKey_down) {
-          isLeftKey_down = true;
-          triggerCar(BUTTON_KEY.left, MOUSE_EVENT.down);
-        }
-      } else if (e.key === 'ArrowRight') {
-        if (!isRightKey_down) {
-          isRightKey_down = true;
-          triggerCar(BUTTON_KEY.right, MOUSE_EVENT.down);
-        }
-      } else if (e.key === 'ArrowDown') {
-        if (!isDownKey_down) {
-          isDownKey_down = true;
-          triggerCar(BUTTON_KEY.down, MOUSE_EVENT.down);
-        }
-      }
-    });
-    document.addEventListener('keyup', (e) => {
-      if (e.key === 'ArrowUp') {
-        isUpKey_down = false;
-        triggerCar(BUTTON_KEY.up, MOUSE_EVENT.up);
-      } else if (e.key === 'ArrowLeft') {
-        isLeftKey_down = false;
-        triggerCar(BUTTON_KEY.left, MOUSE_EVENT.up);
-      } else if (e.key === 'ArrowRight') {
-        isRightKey_down = false;
-        triggerCar(BUTTON_KEY.right, MOUSE_EVENT.up);
-      } else if (e.key === 'ArrowDown') {
-        isDownKey_down = false;
-        triggerCar(BUTTON_KEY.down, MOUSE_EVENT.up);
-      }
-    });
+    document.onkeydown = keyDownEventFunction;
+    document.onkeyup = keyUpEventFunction;
   };
 
   const removeKeyboardListener = () => {
     setWarningMsg(
       'Keyboard is disengaged. You can not use the keyboard as a controller.'
     );
-    document.addEventListener('keydown', null);
-    document.addEventListener('keyup', null);
+    document.onkeydown = null;
+    document.onkeyup = null;
   };
 
   useEffect(() => {
